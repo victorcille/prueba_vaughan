@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\TokenValidator;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,8 +18,7 @@ class ValidateToken
     {
         $token = $request->bearerToken();
 
-        // de momento para hacer pruebas
-        if ($token && $token === '[]{}()') {
+        if ($token && TokenValidator::validate($token)) {
             return $next($request);
         }
 
