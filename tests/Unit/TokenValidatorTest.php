@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\TokenValidator;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class TokenValidatorTest extends TestCase
 {
