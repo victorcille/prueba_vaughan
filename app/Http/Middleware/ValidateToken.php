@@ -11,11 +11,19 @@ class ValidateToken
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(Request): (Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd('Pasa por el middleware');
-        return $next($request);
+        $token = $request->bearerToken();
+
+        // de momento para hacer pruebas
+        if ($token && $token === '[]{}()') {
+            return $next($request);
+        }
+
+        return response()->json([
+            'error' => 'Unauthorized'
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }
